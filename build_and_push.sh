@@ -10,7 +10,7 @@
 #   DOCKER_USER=yourname ./build_and_push.sh --push
 #
 # Environment variables you can override:
-#   DOCKER_USER   Your Docker Hub username          (default: yourdockerhubuser)
+#   DOCKER_USER   Your Docker Hub username          (default: aiforest)
 #   IMAGE_NAME    Repository name on Docker Hub     (default: google-search-mcp)
 #   IMAGE_TAG     Tag to apply                      (default: latest)
 #   MCP_PORT      Port baked into the image         (default: 9040)
@@ -51,30 +51,8 @@ docker build \
 echo ""
 echo "✔  Build complete: ${FULL_IMAGE}"
 
-# ── Push ──────────────────────────────────────────────────────────────────────
-if [[ "$PUSH" == "true" ]]; then
-  echo ""
-  echo "Pushing to Docker Hub..."
-  docker push "${FULL_IMAGE}"
-  docker push "${DOCKER_USER}/${IMAGE_NAME}:$(date +%Y%m%d)"
-  echo ""
-  echo "✔  Pushed: ${FULL_IMAGE}"
-  echo ""
-  echo "Users can now run it with:"
-  echo "  docker run -p ${MCP_PORT}:${MCP_PORT} ${FULL_IMAGE}"
-  echo ""
-  echo "Claude Desktop config:"
-  echo '  {'
-  echo '    "mcpServers": {'
-  echo "      \"google-search\": {"
-  echo "        \"url\": \"http://localhost:${MCP_PORT}/mcp\""
-  echo '      }'
-  echo '    }'
-  echo '  }'
-else
-  echo ""
-  echo "To push to Docker Hub run:"
-  echo "  DOCKER_USER=${DOCKER_USER} ./build_and_push.sh --push"
+
+
   echo ""
   echo "To test locally:"
   echo "  docker run --rm -p ${MCP_PORT}:${MCP_PORT} --shm-size=2g ${FULL_IMAGE}"
