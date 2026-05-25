@@ -1,0 +1,18 @@
+{
+  // Google Search MCP — VS Code / GitHub Copilot
+  // Author: Babak Emami (Babak EA)  emami.babak@gmail.com
+  //
+  // HTTP mode (Docker running):
+  //   docker run -p 9040:9040 --shm-size=2g babakea/google-search-mcp:latest
+  //
+  // stdio mode (local Python, no Docker):
+  //   pip install -r requirements_mcp.txt
+  //   then change "type" to "stdio" and use the command/args form below.
+  "servers": {
+    "google-search-mcp": {
+      "type": "http",
+      "url": "http://localhost:9040/mcp"
+    }
+  },
+  "inputs": []
+}

@@ -1,0 +1,9 @@
+selenium
+screeninfo
+mss
+pillow
+pytesseract
+pyttsx3
+pywin32
+ipywidgets
+openai

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "google-search-mcp": {
+      "serverUrl": "http://localhost:9040/mcp",
+      "disabled": false
+    }
+  }
+}

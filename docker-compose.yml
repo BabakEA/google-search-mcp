@@ -1,0 +1,45 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Google Search MCP Server — Docker Compose
+#
+# Usage:
+#   docker compose up --build          # first run
+#   docker compose up -d               # detached
+#   docker compose logs -f             # follow logs
+#   docker compose down                # stop
+#
+# MCP endpoint (streamable-http):
+#   http://localhost:9040/mcp
+#
+# Claude Desktop (~/.config/claude/claude_desktop_config.json):
+#   {
+#     "mcpServers": {
+#       "google-search": {
+#         "url": "http://localhost:9040/mcp"
+#       }
+#     }
+#   }
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+  browser-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MCP_TRANSPORT: "http"
+        MCP_HOST:      "0.0.0.0"
+        MCP_PORT:      "9040"
+
+    container_name: google-search-mcp
+    ports:
+      - "9040:9040"
+
+    environment:
+      MCP_TRANSPORT: "http"
+      MCP_HOST:      "0.0.0.0"
+      MCP_PORT:      "9040"
+
+    # Chrome needs at least 2 GB of shared memory
+    shm_size: "2gb"
+
+    restart: unless-stopped
